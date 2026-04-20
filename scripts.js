@@ -31,10 +31,34 @@ const EAST_LOS_HIGH_POSTER_URL =
   "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
 
 // This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
+let cards = [
+  {
+    id: 1,
+    name: "Bulbasaur",
+    set: "Scarlet and Violet - 151",
+    rarity: "Illustration Rare",
+    type: "Grass/Poison",
+    price: "79.99",
+    image: "assets/images/bulbasaur.jpg",
+  },
+  {
+    id: 2,
+    name: "Charmander",
+    set: "Scarlet and Violet - 151",
+    rarity: "Illustration Rare",
+    type: "Fire",
+    price: "99.99",
+    image: "assets/images/charmander.png",
+  },
+  {
+    id: 3,
+    name: "Squirtle",
+    set: "Scarlet and Violet - 151",
+    rarity: "Illustration Rare",
+    type: "Water",
+    price: "79.99",
+    image: "assets/images/squirtle.jpeg",
+  },
 ];
 // Your final submission should have much more data than this, and
 // you should use more than just an array of strings to store it all.
