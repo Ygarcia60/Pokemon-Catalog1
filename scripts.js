@@ -468,6 +468,11 @@ function showRandomCard() {
       </div>
     </div>
   `;
+
+  //after 3 seconds , random card is removed and home page is shown again
+  setTimeout(() => {
+    randomCardContainer.innerHTML = "";
+  }, 6000);
 }
 
 //Initial Page Load
@@ -476,6 +481,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //display all cards initially
   showCards(displayedCards);
 
+  const randomCardBtn = document.getElementById("random-card-btn");
   //Get input elements
   const searchInput = document.getElementById("search-input");
   const typeFilter = document.getElementById("type-filter");
@@ -490,5 +496,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if (sortSelect) {
     sortSelect.addEventListener("change", applyFilters);
+  }
+  if (randomCardBtn) {
+    randomCardBtn.addEventListener("click", showRandomCard);
   }
 });
