@@ -23,12 +23,7 @@
  *
  */
 
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
+
 
 // This is an array of strings (TV show titles)
 // My data will Pokemon Card Catalog, just gen 1 of Pokemon
@@ -36,30 +31,139 @@ let cards = [
   {
     id: 1,
     name: "Bulbasaur",
-    set: "Scarlet and Violet - 151",
-    rarity: "Illustration Rare",
-    type: "Grass/Poison",
-    price: 79.99,
+    set: "Expedition E-series 2002",
+    rarity: "Reverse Holo",
+    type: "Grass",
+    price: 363,
     image: "assets/images/bulbasaur.jpg",
   },
   {
     id: 2,
     name: "Charmander",
-    set: "Scarlet and Violet - 151",
-    rarity: "Illustration Rare",
+    set: "McDonalds Promo 2002",
+    rarity: " Holo",
     type: "Fire",
-    price: 99.99,
-    image: "assets/images/charmander.png",
+    price: 393,
+    image: "assets/images/charmander.jpg",
   },
   {
     id: 3,
     name: "Squirtle",
-    set: "Scarlet and Violet - 151",
-    rarity: "Illustration Rare",
+    set: "McDonalds Promo 2002",
+    rarity: "Holo",
     type: "Water",
-    price: 79.99,
-    image: "assets/images/squirtle.jpeg",
+    price: 877,
+    image: "assets/images/squirtle.jpg",
   },
+  {
+    id: 4,
+    name: "Charizard",
+    set: "Base Set (1st edition) ",
+    rarity: "Holo Rare",
+    type: "Fire",
+    price: 168000,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 5,
+    name: "Blastoise",
+    set: "Base Set (1st edition)",
+    rarity: "Holo Rare",
+    type: "Water",
+    price: 8000,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 6,
+    name: "Venusaur",
+    set: "Base Set (1st edition)",
+    rarity: "Holo Rare",
+    type: "Grass",
+    price: 877,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 7,
+    name: "Pikachu",
+    set: "Illustrator Promo ",
+    rarity: "Ultra Rare",
+    type: "Electric",
+    price: 5000000,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 8,
+    name: "Mewtwo",
+    set: "Base Set (Shadowless) ",
+    rarity: "Holo Rare",
+    type: "Psychic",
+    price: 4000,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 9,
+    name: "Gyrados",
+    set: "Base Set (shadowless)",
+    rarity: "Holo Rare",
+    type: "Water",
+    price: 3500,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 10,
+    name: "Alakazam",
+    set: "Base Set (1st edition)",
+    rarity: "Holo Rare",
+    type: "Psychic",
+    price: 45000,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 11,
+    name: "Machamp",
+    set: "Base Set (1st edition)",
+    rarity: "Holo Rare",
+    type: "Fighting",
+    price: 2500,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 12,
+    name: "Raichu",
+    set: "Prerelease Promo",
+    rarity: "Ultra Rare",
+    type: "Electric",
+    price: 10000,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 13,
+    name: "Dragonite",
+    set: "Fossil (1st edition)",
+    rarity: "Holo Rare",
+    type: "Dragon",
+    price: 3000,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 14,
+    name: "Zapados",
+    set: "Base Set (1st edition)",
+    rarity: "Holo Rare",
+    type: "Electric",
+    price: 6000,
+    image: "assets/images/squirtle.jpg",
+  },
+  {
+    id: 6,
+    name: "Venusaur",
+    set: "Base Set (1st edition)",
+    rarity: "Holo Rare",
+    type: "Grass",
+    price: 877,
+    image: "assets/images/squirtle.jpg",
+  },
+
 ];
 // Your final submission should have much more data than this, and
 // you should use more than just an array of strings to store it all.
@@ -153,6 +257,7 @@ function updateResultsCount(count) {
 // Methods --> filter , search, sort
 
 //function applies all methods at once
+console.log("Applying filters...");
 function applyFilters(){
   //Retrieve user input values
   const searchValue = document.getElementById("search-input").value.toLowerCase();
