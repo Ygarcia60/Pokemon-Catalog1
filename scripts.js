@@ -335,13 +335,10 @@ function showCards(cardList) {
   // Loop through each card object in the list
   for (let i = 0; i < cardList.length; i++) {
     const cardData = cardList[i];
-
     // Clone the template card from HTML
     const nextCard = templateCard.cloneNode(true);
-
     // Fill the cloned card with real data
     editCardContent(nextCard, cardData);
-
     // Add the card to the page
     cardContainer.appendChild(nextCard);
   }
@@ -351,32 +348,6 @@ function showCards(cardList) {
 }
 
 // // This function adds cards the page to display the data in the array
-
-// function showCards() {
-//   const cardContainer = document.getElementById("card-container");
-//   cardContainer.innerHTML = "";
-//   const templateCard = document.querySelector(".card");
-
-//   for (let i = 0; i < titles.length; i++) {
-//     let title = titles[i];
-
-//     // This part of the code doesn't scale very well! After you add your
-//     // own data, you'll need to do something totally different here.
-//     let imageURL = "";
-//     if (i == 0) {
-//       imageURL = FRESH_PRINCE_URL;
-//     } else if (i == 1) {
-//       imageURL = CURB_POSTER_URL;
-//     } else if (i == 2) {
-//       imageURL = EAST_LOS_HIGH_POSTER_URL;
-//     }
-
-//     const nextCard = templateCard.cloneNode(true); // Copy the template card
-//     editCardContent(nextCard, title, imageURL); // Edit title and image
-//     cardContainer.appendChild(nextCard); // Add new card to the container
-//   }
-// }
-// 
 
 function editCardContent(card, cardData) {
   card.style.display = "block";
@@ -397,8 +368,9 @@ function editCardContent(card, cardData) {
   // View the output by right clicking on your website,
   // select "Inspect", then click on the "Console" tab
 }
-//Results Count
 
+
+//Results Count
 //Displays how many cards are currently shown
 function updateResultsCount(count) {
   const resultsText = document.getElementById("results-count");
@@ -409,7 +381,6 @@ function updateResultsCount(count) {
 }
 
 // Methods --> filter , search, sort
-
 //function applies all methods at once
 console.log("Applying filters...");
 function applyFilters(){
@@ -422,13 +393,12 @@ function applyFilters(){
   let filtredCards = cards.filter((card) => {
     //check if card name includes search text
     const matchesSearch = card.name.toLowerCase().includes(searchValue);
-
     //check if card type matches selected type
     const matchesType = typeValue === "All" || card.type === typeValue;
     return matchesSearch && matchesType;
   });
 
-  //S2: sort data based on selected sort option
+  //S2: SORT data based on selected sort option
   if (sortValue === "name-az") {
     filtredCards.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortValue === "price-low-high") {
