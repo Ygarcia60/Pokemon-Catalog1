@@ -27,6 +27,7 @@
 
 // This is an array of strings (TV show titles)
 // My data will Pokemon Card Catalog, just gen 1 of Pokemon
+// data structure is just simple array
 let cards = [
   {
     id: 1,
@@ -439,6 +440,34 @@ function applyFilters(){
   //update displayed cards and re-render
   displayedCards = filtredCards;
   showCards(displayedCards);
+}
+
+//JS code for randomCard feature
+function showRandomCard() {
+  const randomCardContainer = document.getElementById("random-card-result");
+
+  if (displayedCards.length === 0) {
+    randomCardContainer.innerHTML = "<p>No cards available to display.</p>";
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * displayedCards.length);
+  const randomCard = displayedCards[randomIndex];
+
+  randomCardContainer.innerHTML = `
+    <div class="card random-card">
+      <div class="card-content">
+        <img src="${randomCard.image}" alt="${randomCard.name} card image"/>
+        <h2>${randomCard.name}</h2>
+        <p>
+          Set: ${randomCard.set} | 
+          Rarity: ${randomCard.rarity} | 
+          Type: ${randomCard.type} | 
+          Price: $${randomCard.price.toFixed(2)}
+        </p>
+      </div>
+    </div>
+  `;
 }
 
 //Initial Page Load
