@@ -31,6 +31,7 @@ const EAST_LOS_HIGH_POSTER_URL =
   "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
 
 // This is an array of strings (TV show titles)
+// My data will Pokemon Card Catalog, just gen 1 of Pokemon
 let cards = [
   {
     id: 1,
@@ -63,59 +64,142 @@ let cards = [
 // Your final submission should have much more data than this, and
 // you should use more than just an array of strings to store it all.
 
-// This function adds cards the page to display the data in the array
-function showCards() {
+let displayedCards = [...cards]; // This is an array of the cards currently being displayed on the page
+
+// DISPLAY function
+function showCards(cardList) {
   const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
   const templateCard = document.querySelector(".card");
 
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
+  // Clear previous cards so we can re-render updated results
+  cardContainer.innerHTML = "";
 
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
-    }
+  // Loop through each card object in the list
+  for (let i = 0; i < cardList.length; i++) {
+    const cardData = cardList[i];
 
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
-    cardContainer.appendChild(nextCard); // Add new card to the container
+    // Clone the template card from HTML
+    const nextCard = templateCard.cloneNode(true);
+
+    // Fill the cloned card with real data
+    editCardContent(nextCard, cardData);
+
+    // Add the card to the page
+    cardContainer.appendChild(nextCard);
   }
+
+  // Update the results count text
+  updateResultsCount(cardList.length);
 }
 
-function editCardContent(card, newTitle, newImageURL) {
+// // This function adds cards the page to display the data in the array
+
+// function showCards() {
+//   const cardContainer = document.getElementById("card-container");
+//   cardContainer.innerHTML = "";
+//   const templateCard = document.querySelector(".card");
+
+//   for (let i = 0; i < titles.length; i++) {
+//     let title = titles[i];
+
+//     // This part of the code doesn't scale very well! After you add your
+//     // own data, you'll need to do something totally different here.
+//     let imageURL = "";
+//     if (i == 0) {
+//       imageURL = FRESH_PRINCE_URL;
+//     } else if (i == 1) {
+//       imageURL = CURB_POSTER_URL;
+//     } else if (i == 2) {
+//       imageURL = EAST_LOS_HIGH_POSTER_URL;
+//     }
+
+//     const nextCard = templateCard.cloneNode(true); // Copy the template card
+//     editCardContent(nextCard, title, imageURL); // Edit title and image
+//     cardContainer.appendChild(nextCard); // Add new card to the container
+//   }
+// }
+// 
+
+function editCardContent(card, cardData) {
   card.style.display = "block";
 
+  // retrieve elements inside the card
   const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
-
   const cardImage = card.querySelector("img");
-  cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
+  const cardText = card.querySelector("p");
 
+  cardImage.src = cardData.image;
+  cardImage.alt = cardData,name + " card image";
+
+  //combine multiple properties into one string to display in the card text
+  cardText.textContent = `Set: ${cardData.set} | Rarity: ${cardData.rarity} | Type: ${cardData.type} | Price: $${cardData.price.toFixed(2)} | Owned: ${cardData.owned ? "Yes" : "No"}`;
   // You can use console.log to help you debug!
   // View the output by right clicking on your website,
   // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
+}
+//Results Count
+
+//Displays how many cards are currently shown
+function updateResultsCount(count) {
+  const resultsText = document.getElementById("results-count");
+
+  if (resultsText) {
+    resultsText.textContent = `Showing ${count} card${count !== 1 ? "s" : ""}`;
+  }
 }
 
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards);
+// Methods --> filter , search, sort
 
-function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!",
-  );
+//function applies all methods at once
+function applyFilters(){
+  //Retrieve user input values
+  const searchValue = document.getElementById("search-input").value.toLowerCase();
+  const typeValue = document.getElementById("type-filter").value;
+  const sortValue = document.getElementById("sort-select").value;
+
+  //S1: filter data based on search + type
+  let filtredCards = cards.filter((card) => {
+    //check if card name includes search text
+    const matchesSearch = card.name.toLowerCase().includes(searchValue);
+
+    //check if card type matches selected type
+    const matchesType = typeValue === "All" || card.type === typeValue;
+    return matchesSearch && matchesType;
+  });
+
+  //S2: sort data based on selected sort option
+  if (sortValue === "name-az") {
+    filtredCards.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortValue === "price-low-high") {
+    filtredCards.sort((a, b) => a.price - b.price);
+  } else if (sortValue === "price-high-low") {
+    filtredCards.sort((a, b) => b.price - a.price);
+  }
+
+  //update displayed cards and re-render
+  displayedCards = filtredCards;
+  showCards(displayedCards);
 }
 
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
-}
+//Initial Page Load
+//Runs when the page first loads
+document.addEventListener("DOMContentLoaded", function () {
+  //display all cards initially
+  showCards(displayedCards);
+
+  //Get input elements
+  const searchInput = document.getElementById("search-input");
+  const typeFilter = document.getElementById("type-filter");
+  const sortSelect = document.getElementById("sort-select");
+
+  //Add event listeners to update results smoothly
+  if (searchInput) {
+    searchInput.addEventListener("input", applyFilters);
+  }
+  if (typeFilter) {
+    typeFilter.addEventListener("change", applyFilters);
+  }
+  if (sortSelect) {
+    sortSelect.addEventListener("change", applyFilters);
+  }
+});
