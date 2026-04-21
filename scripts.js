@@ -39,7 +39,7 @@ let cards = [
     set: "Scarlet and Violet - 151",
     rarity: "Illustration Rare",
     type: "Grass/Poison",
-    price: "79.99",
+    price: 79.99,
     image: "assets/images/bulbasaur.jpg",
   },
   {
@@ -48,7 +48,7 @@ let cards = [
     set: "Scarlet and Violet - 151",
     rarity: "Illustration Rare",
     type: "Fire",
-    price: "99.99",
+    price: 99.99,
     image: "assets/images/charmander.png",
   },
   {
@@ -57,7 +57,7 @@ let cards = [
     set: "Scarlet and Violet - 151",
     rarity: "Illustration Rare",
     type: "Water",
-    price: "79.99",
+    price: 79.99,
     image: "assets/images/squirtle.jpeg",
   },
 ];
@@ -129,10 +129,12 @@ function editCardContent(card, cardData) {
   const cardText = card.querySelector("p");
 
   cardImage.src = cardData.image;
-  cardImage.alt = cardData,name + " card image";
+  cardImage.alt = cardData.name + " card image";
+  cardHeader.textContent = cardData.name;
 
   //combine multiple properties into one string to display in the card text
-  cardText.textContent = `Set: ${cardData.set} | Rarity: ${cardData.rarity} | Type: ${cardData.type} | Price: $${cardData.price.toFixed(2)} | Owned: ${cardData.owned ? "Yes" : "No"}`;
+  cardText.textContent = `Set: ${cardData.set} | Rarity: ${cardData.rarity} | Type: ${cardData.type} | Price: $${cardData.price.toFixed(2)}`;
+
   // You can use console.log to help you debug!
   // View the output by right clicking on your website,
   // select "Inspect", then click on the "Console" tab
